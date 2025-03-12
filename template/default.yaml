@@ -13,9 +13,11 @@ llm:
   model_supports_json: true # recommended if this is available for your model.
   # audience: "https://cognitiveservices.azure.com/.default"
   api_base: ${AZURE_API_BASE}
-  api_version: 2024-08-01-preview
+  api_version: 2024-10-21
   # organization: <organization_id>
   deployment_name: gpt-4o-mini
+  tokens_per_minute: ${AZURE_TOKENS_PER_MINUTE}
+  requests_per_minute: ${AZURE_REQUESTS_PER_MINUTE}
 
 parallelization:
   stagger: 0.3
@@ -35,10 +37,12 @@ embeddings:
     type: azure_openai_embedding # or azure_openai_embedding
     model: text-embedding-3-small
     api_base: ${AZURE_EMBEDDING_API_BASE}
-    api_version: "2023-05-15"
+    api_version: "2024-10-21"
     # audience: "https://cognitiveservices.azure.com/.default"
     # organization: <organization_id>
     deployment_name: "text-embedding-3-small"
+    tokens_per_minute: ${AZURE_EMBEDDING_TOKENS_PER_MINUTE}
+    requests_per_minute: ${AZURE_EMBEDDING_REQUESTS_PER_MINUTE}
 
 ### Input settings ###
 
