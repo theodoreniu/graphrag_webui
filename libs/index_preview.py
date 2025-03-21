@@ -19,19 +19,19 @@ def index_preview(project_name: str):
                 "🔗 text_units",
                 ])
             with tab1:
-                get_parquet_file(project_name=project_name, artifact_name="create_final_entities.parquet")
+                get_parquet_file(project_name=project_name, artifact_name="entities.parquet")
             with tab2:
-                get_parquet_file(project_name=project_name, artifact_name="create_final_nodes.parquet")
+                get_parquet_file(project_name=project_name, artifact_name="final_nodes.parquet")
             with tab3:
-                get_parquet_file(project_name=project_name, artifact_name="create_final_communities.parquet")
+                get_parquet_file(project_name=project_name, artifact_name="communities.parquet")
             with tab4:
-                get_parquet_file(project_name=project_name, artifact_name="create_final_community_reports.parquet")
+                get_parquet_file(project_name=project_name, artifact_name="community_reports.parquet")
             with tab5:
-                get_parquet_file(project_name=project_name, artifact_name="create_final_documents.parquet")
+                get_parquet_file(project_name=project_name, artifact_name="documents.parquet")
             with tab6:
-                get_parquet_file(project_name=project_name, artifact_name="create_final_relationships.parquet")
+                get_parquet_file(project_name=project_name, artifact_name="relationships.parquet")
             with tab7:
-                get_parquet_file(project_name=project_name, artifact_name="create_final_text_units.parquet")
+                get_parquet_file(project_name=project_name, artifact_name="text_units.parquet")
 
 
 def get_parquet_file(project_name:str, artifact_name: str):

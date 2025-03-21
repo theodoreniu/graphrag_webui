@@ -5,6 +5,7 @@ from pathlib import Path
 import streamlit as st
 import graphrag.api as api
 from graphrag.config.load_config import load_config
+from graphrag.logger.print_progress import PrintProgressLogger
 
 
 async def start(base_path:str):
@@ -16,6 +17,7 @@ async def start(base_path:str):
     ) = await api.generate_indexing_prompts(
             config=load_config(root_dir=Path(base_path)),
             root=base_path,
+            logger=PrintProgressLogger(prefix="Generating prompts..."),
         )
 
     tab1, tab2, tab3 = st.tabs([

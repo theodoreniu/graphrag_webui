@@ -4,11 +4,12 @@ from streamlit_ace import st_ace
 from libs.common import list_files_and_sizes
 import libs.config as config
 
-from graphrag.prompts.index.claim_extraction import CLAIM_EXTRACTION_PROMPT
+from graphrag.prompts.index.extract_graph import GRAPH_EXTRACTION_PROMPT
+from graphrag.prompts.index.extract_claims import EXTRACT_CLAIMS_PROMPT
 from graphrag.prompts.index.community_report import (
     COMMUNITY_REPORT_PROMPT,
 )
-from graphrag.prompts.index.entity_extraction import GRAPH_EXTRACTION_PROMPT
+
 from graphrag.prompts.index.summarize_descriptions import SUMMARIZE_PROMPT
 from graphrag.prompts.query.drift_search_system_prompt import DRIFT_LOCAL_SYSTEM_PROMPT
 from graphrag.prompts.query.global_search_knowledge_system_prompt import (
@@ -22,7 +23,7 @@ from graphrag.prompts.query.local_search_system_prompt import LOCAL_SEARCH_SYSTE
 from graphrag.prompts.query.question_gen_system_prompt import QUESTION_SYSTEM_PROMPT
 
 
-def get_setting_file(file_path: str, default_prompt: str = ""):
+def get_setting_file(file_path: str, default_prompt: str=""):
     if not os.path.exists(file_path):
         return default_prompt
 
@@ -34,9 +35,9 @@ def get_setting_file(file_path: str, default_prompt: str = ""):
 def setting_editor(
     project_name: str,
     file_path: str,
-    default_value: str = "",
+    default_value: str="",
     language="yaml",
-    read_only: bool = False,
+    read_only: bool=False,
 ):
     settings_file = f"/app/projects/{project_name}/{file_path}"
 
@@ -73,7 +74,7 @@ def setting_editor(
         st.success(f"Settings restored: {file_path}, please refresh the page.")
 
 
-def list_and_download_files(files_path: str, title: str = "Files"):
+def list_and_download_files(files_path: str, title: str="Files"):
     if not os.path.exists(files_path):
         os.makedirs(files_path)
 
@@ -156,7 +157,7 @@ def set_settings(project_name: str, read_only=False):
         setting_editor(
             project_name,
             "prompts/claim_extraction.txt",
-            default_value=CLAIM_EXTRACTION_PROMPT,
+            default_value=EXTRACT_CLAIMS_PROMPT,
             language="plain_text",
             read_only=read_only,
         )

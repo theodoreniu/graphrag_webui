@@ -5,6 +5,9 @@ import streamlit as st
 from dotenv import load_dotenv
 from libs.common import load_project_env
 
+load_dotenv()
+
+
 def get_container_name(project_name):
     container_name = "graphrag" + project_name + "cache"
     container_name = container_name.replace("_", "")

@@ -10,7 +10,8 @@ logger = get_logger('create_project_cli')
 
 root_project_dir = os.path.dirname(os.path.dirname(__file__))
 
-def overwrite_settings_yaml(project_dir, new_project_name, create_db_type = "ai_search"):
+
+def overwrite_settings_yaml(project_dir, new_project_name, create_db_type="ai_search"):
     settings_yaml = f"{project_dir}/settings.yaml"
 
     run_command(f"cp {project_dir}/settings.yaml {project_dir}/settings_default.yaml")
@@ -42,6 +43,7 @@ def overwrite_settings_env(root_dir):
         with open(settings_env, "w") as f:
             f.write(t.read())
 
+
 def init_graphrag_project(project_name: str):
     """ initialize graphrag project
     
@@ -68,10 +70,12 @@ def init_graphrag_project(project_name: str):
         logger.error(f"project {project_name} already exists")
         return False
 
-    initialize_project_at(project_dir)
+    initialize_project_at(
+        path=project_dir,
+        force=False
+        )
 
-    overwrite_settings_yaml(project_dir, project_name, "ai_search")
-
-    overwrite_settings_env(project_dir)
+    # overwrite_settings_yaml(project_dir, project_name, "ai_search")
+    # overwrite_settings_env(project_dir)
 
     return True

@@ -22,7 +22,7 @@ def initialize_project(path):
 
     try:
         with redirect_stdout(output):
-            initialize_project_at(path)
+            initialize_project_at(path=path, force=False)
         output_value = output.getvalue()
         st.success(output_value)
     finally:
@@ -106,9 +106,9 @@ def create_project():
         try:
             if copy_from_project_name == new_project_value:
                 initialize_project(path=root)
-                overwrite_settings_yaml(
-                    root, formatted_project_name, create_db_type)
-                overwrite_settings_env(root)
+                # overwrite_settings_yaml(
+                #     root, formatted_project_name, create_db_type)
+                # overwrite_settings_env(root)
             else:
                 copy_project(copy_from_project_name, formatted_project_name)
         except Exception as e:

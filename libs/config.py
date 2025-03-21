@@ -6,8 +6,8 @@ from pydantic_settings import BaseSettings
 
 load_dotenv()
 
-app_version = "1.2.0"
-graphrag_version = "1.2.0"
+app_version = "2.1.0"
+graphrag_version = "2.1.0"
 
 app_started_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 app_name = "graphrag"
@@ -85,6 +85,7 @@ pdf_gpt_vision_prompt_azure = """我给你发一张pdf的截图，这是azure的
 
 同时，我也提取了这个截图的原始文字给你参考，目的是帮助你更准确的提取信息而不至于提取错误的文字，截图里的所有原始文字如下：
 {page_txt}"""
+
 
 class Settings(BaseSettings):
     server_port: int = 20213

@@ -7,8 +7,6 @@ from theodoretools.fs import list_subdirectories
 import libs.config as config
 from graphrag.config.load_config import load_config
 from pathlib import Path
-import sys
-import signal
 import hashlib
 from dotenv import load_dotenv
 
@@ -49,14 +47,14 @@ def is_built(project_name: str):
         return False
 
     elements_set = [
-        "create_final_communities.parquet",
-        "create_final_entities.parquet",
-        "create_final_text_units.parquet",
-        "create_final_community_reports.parquet",
-        "create_final_nodes.parquet",
+        "communities.parquet",
+        "entities.parquet",
+        "text_units.parquet",
+        "community_reports.parquet",
+        # "final_nodes.parquet",
         "stats.json",
-        "create_final_documents.parquet",
-        "create_final_relationships.parquet",
+        "documents.parquet",
+        "relationships.parquet",
     ]
 
     return set(elements_set).issubset(set(files))
@@ -195,7 +193,7 @@ def get_project_names():
     return list
 
 
-def run_command(command: str, output: bool = False):
+def run_command(command: str, output: bool=False):
     process = subprocess.Popen(
         command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True
     )
