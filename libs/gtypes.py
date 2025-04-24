@@ -60,6 +60,7 @@ class CompletionCreateParamsBase(BaseModel):
     user: Optional[str] = None
     generate_question: Optional[bool] = False
     generate_question_count: Optional[int] = 5
+    generate_question_prompt: Optional[str] = None
     show_reference: Optional[bool] = False
 
     def llm_chat_params(self) -> dict[str, Any]:

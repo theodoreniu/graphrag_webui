@@ -112,7 +112,8 @@ async def local_question_gen(request, context_data: dict):
     config, data = await search.load_context(root, data_dir)
     llm = get_llm(config)
     token_encoder = tiktoken.get_encoding(config.encoding_model)
-    question_gen = LocalQuestionGen(llm=llm, token_encoder=token_encoder, context_builder=None, context_builder_params=None)
+    system_prompt = request.generate_question_prompt
+    question_gen = LocalQuestionGen(llm=llm, token_encoder=token_encoder, context_builder=None, context_builder_params=None, system_prompt=system_prompt)
     question_history = [user_message.content for user_message in request.messages if user_message.role == "user"]
     questions = await question_gen.agenerate(
         question_history=question_history,
