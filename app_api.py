@@ -20,6 +20,7 @@ from graphrag.query.structured_search.basic_search.search import BasicSearch
 from graphrag.query.structured_search.drift_search.search import DRIFTSearch
 from graphrag.query.structured_search.global_search.search import GlobalSearch
 from graphrag.query.question_gen.local_gen import LocalQuestionGen
+from graphrag.api.query import _load_search_prompt
 from libs import search
 from libs.search import reformat_context_data
 from libs.gtypes import ChatCompletionMessageParam, ChatCompletionStreamOptionsParam, ChatCompletionToolParam, ChatQuestionGen
@@ -112,7 +113,7 @@ async def local_question_gen(request, context_data: dict):
     config, data = await search.load_context(root, data_dir)
     llm = get_llm(config)
     token_encoder = tiktoken.get_encoding(config.encoding_model)
-    system_prompt = request.generate_question_prompt
+    system_prompt = request.generate_question_prompt if request.generate_question_prompt else _load_search_prompt(config.root_dir, "prompts/question_gen_system_prompt.txt")
     question_gen = LocalQuestionGen(llm=llm, token_encoder=token_encoder, context_builder=None, context_builder_params=None, system_prompt=system_prompt)
     question_history = [user_message.content for user_message in request.messages if user_message.role == "user"]
     questions = await question_gen.agenerate(
